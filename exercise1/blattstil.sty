@@ -1,0 +1,73 @@
+%
+% blattstil package --- Stil fuer Physik-1-Uebungsblaetter
+% U. Husemann, October 14, 2003
+%
+\NeedsTeXFormat{LaTeX2e} 
+\ProvidesClass{blattstil}
+\RequirePackage{ngerman}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{graphicx}
+\RequirePackage{ifthen}
+\RequirePackage[latin1]{inputenc}
+\RequirePackage{array}
+%\DeclareOption{fleqn}{\input{fleqn.clo}}
+%\ExecuteOptions{fleqn}
+\ProcessOptions
+%
+\sloppy
+%
+\addtolength{\textwidth}{20mm} %2.0
+\addtolength{\textheight}{35mm}
+\addtolength{\headheight}{0.3ex}
+\addtolength{\hoffset}{-10mm}
+\addtolength{\voffset}{-25mm}
+%\addtolength{\oddsidemargin}{0.7cm} %0.7
+%\addtolength{\evensidemargin}{-0.75cm}
+\setlength{\parindent}{0mm}
+%\setlength{\mathindent}{0mm}
+\pagestyle{empty}
+%
+\newcounter{teil}
+\newenvironment{teilaufgabe}{
+\begin{list}{\roman{teil})}%
+{\usecounter{teil}%
+\setlength{\topsep}{1mm}\setlength{\partopsep}{1mm}%
+\setlength{\itemsep}{1mm}\setlength{\parsep}{1mm}}}%
+{\end{list}}
+%
+\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{\theenumi)}
+\newcounter{aufgabennummer}
+\newcommand{\dieaufgabe}{\arabic{aufgabennummer}}
+\newcommand{\aufgabe}[1][0]{\stepcounter{aufgabennummer}%
+  \noindent{\large\bf\vspace{2mm}\\ Exercise \dieaufgabe}:%
+  \ifthenelse{#1 = 1}{\hfill (#1 point)}{}%
+  \ifthenelse{#1 > 1}{\hfill (#1 points)}{}%
+  \vspace{1mm}\\}
+%
+\newcommand{\kopf}[3]{%
+  \begin{tabular}{ >{\raggedright}p{.5\linewidth} >{\raggedleft\arraybackslash}p{.5\linewidth} }
+  Universit\"at Z\"urich & Herbstsemester 2016 \\
+  Physik-Institut & Prof.~Dr.~N.~Serra,\\
+  & Dr.~R.~Coutinho, Dr.~P.~Owen \\
+  \end{tabular}
+   \begin{center}%
+     {\bf \Large Problem set No. #1 \\[1mm]
+       PHY211: Nuclear and particle physics I }%
+   \end{center}%
+    {\bf Issued:} #2\\[2mm]%
+    {\bf Due:} #3\\[2mm]%
+}
+
+% make ',' an ordinary Symbol in decimal numbers
+\mathchardef\CommaOrdinary="013B
+\mathchardef\CommaPunct   ="613B
+\mathcode`,="8000   % , im Math-Mode aktiv ("8000) machen
+{\catcode`\,=\active
+\gdef ,{\obeyspaces\futurelet\next\CommaCheck}}
+\def\CommaCheck{\if\space\next\CommaPunct\else\CommaOrdinary\fi}
+
+\newcommand{\unit}[1]{\ensuremath{\,\mathrm{#1}}}
+\newcommand{\de}{\ensuremath{\mathrm{d}}}
+\newcommand{\del}{\ensuremath{\partial}}
