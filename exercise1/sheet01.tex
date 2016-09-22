@@ -1,14 +1,14 @@
-\documentclass[11pt,a4paper]{article}
+% vim: set sts=4 et:
 
-% Style
-\usepackage{blattstil}
-\usepackage{amsmath}
-\usepackage{xspace}
-\usepackage{hyperref}
-\usepackage{amsthm, amssymb}
+\input{./header}
+\input{./shortcuts}
 
-% for numbering give last exercise's number
-\setcounter{aufgabennummer}{0}
+\newcommand{\sheetnr}{1}
+\newcommand{\issued}{23.10.2016}
+\newcommand{\dueUni}{30.10.2016 10:00}
+%\newcommand{\version}{1}   % if you need to release a corrected version, uncomment and increase this counter
+
+\newcommand{\dd}{\text{d}}
 
 \def\bra#1{\mathinner{\langle{#1}|}}
 \def\ket#1{\mathinner{|{#1}\rangle}}
@@ -31,63 +31,57 @@
 \newcommand{\Pe}{\ensuremath{\mathcal{P}_e}\xspace}
 \newcommand{\Pf}{\ensuremath{\mathcal{P}_f}\xspace}
 
-\begin{document}
 
-% Kopf des Blatts: lfd. Nummer und Abgabemodalitaeten
-\kopf{1}{23.10.2015}{To be handed in during the lecture on 30.10.2016}
+%\showsolutions
 
-% Problem sets
-\vspace{-5mm}
+\startsheet
 
-Exercises should preferably be completed in English, but can also be done in German. Ansatz and solution are graded. Therefore, write down what physics principles you start from and how you arrive at the solution.
+Exercises should preferably be completed in English, but can also be done in German. 
+Please write down what physics principles you start from and how you arrive at the solution.
+A minimum of 60\% of the homeworks need to be handled for admission in the final exam. 
 
-\begin{aufgabe}[3]
+\exercise[3]{S.I units converstion}
 
 Convert the following quantities into S.I. units. Note that $1~\mathrm{b} = 10^{-24}~\mathrm{cm}^{2}$.
 
-\begin{enumerate}
+\begin{subtasks}
 \item 125 GeV into joules
 \item 125 GeV into kilograms
 \item 15 p$b$ into $meters^{2}$
 \item 20 $TeV^{-1}$ into meters
-\end{enumerate}
+\end{subtasks}
 
-\end{aufgabe}
+\exercise[8]{Special relativity}
 
-\begin{aufgabe}[10]
-
-\begin{enumerate}
+\begin{subtasks}
 \item Consider a symmetric 45 GeV $e^{+}e^{-}$ collider. If it was a fixed target experiment (the positron was stationary), calculate the energy needed for the incident electron.
 \item Now consider an asymmetric $e^{+}e^{-}$ collider, where the electron has an energy of 9\,GeV and the positron has an energy of 3\,GeV. If the collision creates a particle of mass 10GeV, what speed does it travel at in the lab frame?
-\end{enumerate}
+\end{subtasks}
 
-\end{aufgabe}
+\exercise[4]{Properties of operators} 
 
-\begin{aufgabe}[3]
+In this exercise some basic properties of operators are briefly reviewed. 
 
-
-Properties of operators 
-
-\begin{enumerate}
-%
-\item Prove the following properties: 
+\begin{subtasks}
+ \item Prove the following properties: 
  \begin{enumerate}
   %
-  \item[(a)] $[A,\,B] = -[B,\,A]$
+   \item[i.] $[A,\,B] = -[B,\,A]$
   %
-  \item[(b)] $[A,\,BC] = [A,\,B]C + B[A,\,C]$
+   \item[ii.] $[A,\,BC] = [A,\,B]C + B[A,\,C]$
   %
-  \item[(c)] $[A,\,[B,\,C]] + [B,\,[C,\,A]] + [C,\,[A,\,B]] = 0$ 
+   \item[iii.] $[A,\,[B,\,C]] + [B,\,[C,\,A]] + [C,\,[A,\,B]] = 0$ 
   %
  \end{enumerate}
-%
- \item Consider the operators $\rm{X}$ and its corresponding derivate $D_{x}$ defined as 
+ %
+  \item Consider the operators $\rm{X}$ and its corresponding derivate $D_{x}$ defined as 
   \begin{equation}
    \begin{aligned}
     {\rm{X\psi}}(x,y,z) & = x\psi(x,y,z)\,, \nonumber \\ 
     D_{x}\psi(x,y,z) & =\frac{\partial \psi(x,y,z)}{\partial x}\,. \nonumber
    \end{aligned}
   \end{equation}
+    
   Calculate the commutator $[{\rm{X}},\,D_{x}]$
 %
  \item The trace of an operator A on an N dimensional Hilbert space is defined as 
@@ -97,12 +91,10 @@ Properties of operators
   for any orthonormal set of basis vectors $\{\ket{\psi_{i}}\}$.
   Prove that ${\rm{Tr}}(AB) = {\rm{Tr}}(BA)$.  
 %
-\end{enumerate}
+\end{subtasks}
 
-\end{aufgabe}
-
-\begin{aufgabe}[3]
-
+\exercise[5]{Potential barrier} 
+  
   Consider an incident particle coming from $x = - \infty$ in a potential 
 
   \[ V(x) =  
@@ -110,14 +102,12 @@ Properties of operators
   \begin{tabular}{cc}
     $~~~\,0$ , & $x < 0$     \\
     $+V_{0}$ , & $0 < x < a$ \\
-    $~~~\,0$ , & $x > a$  
+    $~~~\,0$ , & $x > a$ \\ 
   \end{tabular}
   \right.
   \]
   Solve the stationary state with $E > V_{0}$ and calculate the reflection (R) and transmission (T) coefficients. 
   Plot the variation of T as a function of the width of the potential barrier for fixed values of $E$ and $V_{0}$. 
   Discuss the interpretation of the maximum of $T$.  
-%
-\end{aufgabe}
 
 \end{document}

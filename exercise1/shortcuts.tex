@@ -1,0 +1,83 @@
+%
+% Define here some handy shortcuts
+% 
+% to be consistent and backwards compatible, try not to delete
+% or replace existing ones
+%
+
+
+% \renewcommand{\d}{\mathrm{d}}
+% \renewcommand{\labelenumi}{(\roman{enumi})}
+
+% \newcommand{\bm}{\boldmath}
+% \newcommand{\dps}{\displaystyle}
+% \newcommand{\e}{\mbox{e}}
+% \newcommand{\del}{\partial}
+% \newcommand{\arctanh}{\mathrm{arctanh}}
+% \newcommand{\prim}[1]{{#1^{\prime}}}
+% \newcommand{\tr}{\mathrm{Tr}}
+% \newcommand{\naeher}{\!\!\!}
+% \newcommand{\vect}[1]{\vec #1}
+% \newcommand{\ddd}[1]{\d\vect{#1} }
+
+\newcommand{\IN}{\mathbb{N}}
+\newcommand{\INO}{\mathbb{N}_0}
+\newcommand{\IR}{\mathbb{R}}
+\newcommand{\IC}{\mathbb{C}}
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\artanh}{artanh}
+\DeclareMathOperator{\arcoth}{arcoth}
+
+% commonly misstyped...
+\DeclareMathOperator{\arcsinh}{arsinh}
+\DeclareMathOperator{\arccosh}{arcosh}
+\DeclareMathOperator{\arctanh}{artanh}
+\DeclareMathOperator{\arccoth}{arcoth}
+
+\DeclareMathOperator*{\Res}{Res}  % residuum
+\DeclareMathOperator{\Ang}{Ang}  % Angle
+
+\newcommand{\PI}{\uppi}    % consult http://tex.stackexchange.com/questions/54166/upright-lowercase-pi
+\newcommand{\I}{\textrm{i}} %\upiota} % http://tex.stackexchange.com/questions/223759/how-to-add-a-dot-above-imath
+\newcommand{\E}{\mathrm{e}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+\newcommand{\Order}[1]{\mathcal{O}\!\left(#1\right)}
+\newcommand{\D}{\mathrm{d}}
+\newcommand{\pderr}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\integ}[2]{\int \D #2 \; \left[#1\right]}
+
+% sofisticated integral.. 
+% \Int[lower][upper]{int_variable}{term}
+% \Int*[lower][upper]{int_variable}{term} --> without brackets around term
+\NewDocumentCommand{\Int}{ s O{} O{} m m }{
+	\IfBooleanTF {#1}
+	{\int_{#2}^{#3} \D #4 \; #5}
+	{\int_{#2}^{#3} \D #4 \; \left[#5\right]}
+}
+
+% handy derrivative
+% \DD[power]{variable}
+\NewDocumentCommand{\DD}{ O{x} O{} }{
+	\frac{\D^{#2}}{\D#1^{#2}}
+}
+\NewDocumentCommand{\DDx}{ O{} }{\DD[x][#1]}
+\NewDocumentCommand{\DDy}{ O{} }{\DD[x][#1]}
+\NewDocumentCommand{\DDt}{ O{} }{\DD[x][#1]}
+
+
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\oneover}[1]{\frac{1}{#1}}
+
+\newcommand{\textoversymb}[2]{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily #2}}}{#1}}}
+
+
+%\DeclarePairedDelimiter\parents{\left(}{\right)}
+%\DeclarePairedDelimiter\brackets{\left\[}{\right\]}
+%\DeclarePairedDelimiter\braces{\left\{}{\right\}}

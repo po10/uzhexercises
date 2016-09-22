@@ -1,0 +1,199 @@
+%
+% MMP Ex Sheet Template
+%
+% Rafael Kueng <rafik@physik.uzh.ch>
+% originally based on the template from the Jetzter group
+%
+
+%
+% USAGE:
+% create a new tex file for each new exercise. use like this:
+%
+% \input{./_header}
+% \input{./_shortcuts}
+% 
+% \newcommand{\sheetnr}{1}
+% \newcommand{\issued}{16.09.2014}
+% \newcommand{\dueUni}{22.09.2014 9:00}
+% 
+% \startsheet
+% 
+% \exercise[Nr Pts]{Descripntion}
+% \begin{subtasks}
+%   \task blablabla blasdf asdf dgsf
+%   \task sadfkj sdf asdf
+% \end{subtasks}
+% \turnpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%
+% Imports
+%
+
+\documentclass[11pt,a4paper]{article}
+% debug
+%\documentclass[11pt,a4paper,draft]{article}
+%\usepackage{showframe}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{siunitx} % help with si units, like: \si{\kilogram\metre\per\second} and \num{4.458757e-12}
+\usepackage{upgreek} % upright greek letters, like: $\uppi$
+\usepackage{xparse}
+
+%\usepackage{psfrag}
+%\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{xifthen}
+\usepackage{verbatim}  % used for the \comment used to hide solutions
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{cancel}
+\usepackage{ulem} % for different underlines http://texdoc.net/texmf-dist/doc/generic/ulem/ulem.pdf
+\usepackage{braket}
+
+%
+% Setup the layout
+%
+
+\linespread{1.15}
+\geometry{left=2cm,right=2cm,top=2cm,bottom=3cm}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\pagestyle{empty}
+
+
+%
+% Set the authors ect..
+%
+
+\newcommand{\thelecture}{PHY211 - KTI}
+\newcommand{\thelectureshort}{FP}
+\newcommand{\thelectureURL}{\url{http://www.physik.uzh.ch/de/lehre/PHY211/}}
+\newcommand{\sheettype}{Exercise}
+\newcommand{\thesemester}{Herbstsemester 2016}
+\newcommand{\thelecturer}{Prof.~N.~Serra}
+\newcommand{\theassistants}{R.~Silva~Coutinho, P.~Owen}
+
+
+
+%
+% DEFINITIONS & NEW COMMANDS
+%
+
+\newcounter{exercise}
+\setcounter{exercise}{1}
+
+% define switches
+\newboolean{turnpagesw}
+\setboolean{turnpagesw}{true}
+
+\newboolean{showsol}
+\setboolean{showsol}{false}
+
+
+
+% starts the doc and draws the header / banner
+\newcommand{\startsheet}{
+  \begin{document}
+  \begin{minipage}{0.25\textwidth}{
+    \begin{flushleft}\includegraphics[width=2.5cm]{./unisiegel.pdf}\end{flushleft}
+  }\end{minipage}
+  \hfill
+  \begin{minipage}{0.40\textwidth}{
+    \begin{center}\bf\LARGE%
+    \textrm{\thelecture}\\
+    \LARGE\textrm{\sheettype \, Sheet \sheetnr}\end{center}
+  }\end{minipage}
+  \hfill
+  \begin{minipage}{0.25\textwidth}{
+    \begin{flushright}
+      \textrm{\thesemester}\\
+      \textrm{\thelecturer} \\
+    \end{flushright}
+  }\end{minipage}
+
+  \begin{minipage}{0.6\textwidth}{
+    \theassistants\\
+    \thelectureURL
+  }\end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}{
+    \begin{flushright}
+      Issued: \issued \ifthenelse{\isundefined{\version}}{}{ {\tiny(v\version)}}\\
+      Due: \dueUni
+    \end{flushright}
+  }\end{minipage}
+
+  \rule{\textwidth}{1pt}
+}
+
+% use this to break a page
+% creates a turn over note and creates the headline on the new page
+\newcommand{\turnpage}{
+    \ifthenelse{\boolean{turnpagesw}}{
+        \vfill\hfill -- please turn over -- \newpage
+        {Exercises for \thelectureshort} \hfill Sheet \sheetnr\vspace{-0.2cm}\\
+        \rule{\textwidth}{1pt}
+    }{}}
+
+% use this to start a new exercise
+\newcommand{\exercise}[2][?]{
+  \vspace{1.5em}
+  \textbf{Exercise \theexercise:} #2 (#1 Pts.) %
+  \stepcounter{exercise}
+}
+
+% use this to create subtaks:
+\newenvironment{subtasks}{
+  \newcommand{\task}{\item }
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \begin{enumerate}[label=\alph*)]
+}
+{
+  \end{enumerate}
+}
+
+
+
+% set this "flag" at beginning if you want to print the solutions as well
+\newcommand{\showsolutions}{
+	\setboolean{showsol}{true}
+	\setboolean{turnpagesw}{false} % don't create pageturns if solutions are shown
+}
+
+
+% mark solutions with this envirionment
+\newenvironment{solution}{
+  \ifthenelse{\boolean{showsol}}
+    {
+    \begin{framed}
+    \textbf{SOLUTION:}
+    }
+    {\expandafter\comment}
+}
+{
+    \ifthenelse{\boolean{showsol}}
+    {
+    \end{framed}
+    \newpage
+    }
+    {\expandafter\endcomment}
+}
+
+
